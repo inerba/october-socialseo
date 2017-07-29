@@ -1,0 +1,25 @@
+<?php if ($this->previewMode): ?>
+
+    <div class="form-control">
+        <?= $value ?>
+    </div>
+
+<?php else: ?>
+    <textarea
+        type="text"
+        id="<?= $this->getId('input') ?>"
+        name="<?= $name ?>"
+        class="form-control"
+        autocomplete="off"><?= $value ?></textarea>
+    <div id="<?= $this->getId('input') ?>charNum"></div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            calculateTextLength( $('#<?= $this->getId('input') ?>'), <?= $this->config->maxlen ?> );
+
+            $('body').on('keyup', $('#<?= $this->getId('input') ?>') , function () {
+                calculateTextLength( $('#<?= $this->getId('input') ?>'), <?= $this->config->maxlen ?> );
+            });
+
+        });
+    </script>
+<?php endif ?>
