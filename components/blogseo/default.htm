@@ -1,3 +1,47 @@
-<p>This is the default markup for component BlogSeo</p>
+{# TITLE #}
+{% if post.socialseo.title %}
+	{% set title = post.socialseo.title %}
+{% else %}
+	{% set title = post.title %}
+{% endif %}
 
-<small>You can delete this file if you want</small>
+{# META DESCRIPTION #}
+{% if post.socialseo.description %}
+	{% set description = post.socialseo.description %}
+{% else %}
+	{% set description = post.content %}
+{% endif %}
+
+{# SOCIAL DESCRIPTION #}
+{% if post.socialseo.fb_description %}
+	{% set fb_description = post.socialseo.fb_description %}
+{% else %}
+	{% set fb_description = seo_short(description,255) %}
+{% endif %}
+
+{# OG IMAGE & TWITTER CARD IMAGE #}
+{% if post.social_image %}
+	{% set social_image = post.social_image.thumb(1200, 630, { mode: 'crop', quality: '80', extension: 'jpg' }) %}
+{% else %}
+	{% set social_image = post.cover_image.thumb(1200, 630, { mode: 'crop', quality: '80', extension: 'jpg' }) %}
+{% endif %}
+
+{% set canonical = post.socialseo.canonical_url %}
+
+{# DISPLAY DOPO LA PREPARAZIONE #}
+{% put SEO %}
+{% default %}
+	
+	{{ seo_description(description) }}
+
+	{{ seo_canonical(canonical) }}
+    
+    {{ seo_title(title) }}
+
+    {{ seo_og(title, fb_description, canonical, social_image) }}
+    
+    {{ seo_twitter_card(title, fb_description, social_image, '@ileP', 'summary_large_image') }}
+
+    {{ seo_other() }}
+
+{% endput %}

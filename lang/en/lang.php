@@ -49,6 +49,12 @@
             'fb' => 'Facebook App Id',
             'fb_comment' => 'The unique ID that lets Facebook know the identity of your site.',
         ],
+        'tab_twitter_card' => [
+            'label' => 'Twitter Card',
+            'twitter_card' => 'Use Twitter Card',
+            'twitter_card_comment' => 'Enable Twitter Card Tags',
+            
+        ],
     ],
     'component' => [
         'blog' => [

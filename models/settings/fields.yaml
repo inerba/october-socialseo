@@ -1,0 +1,93 @@
+tabs:
+  fields:
+    enable_title:
+      label: inerba.socialseo::lang.settings.tab_settings.site
+      comment: inerba.socialseo::lang.settings.tab_settings.site_comment
+      type: switch
+      span: left
+      tab: inerba.socialseo::lang.settings.tab_settings.label
+
+    enable_canonical_url:
+      label: inerba.socialseo::lang.settings.tab_settings.canonical
+      type: switch
+      comment: inerba.socialseo::lang.settings.tab_settings.canonical_comment
+      tab: inerba.socialseo::lang.settings.tab_settings.label
+      span: right
+
+    title:
+      label: inerba.socialseo::lang.settings.tab_settings.sitename
+      commentAbove: inerba.socialseo::lang.settings.tab_settings.sitename_comment_above
+      span: left
+      comment: inerba.socialseo::lang.settings.tab_settings.sitename_comment
+      tab: inerba.socialseo::lang.settings.tab_settings.label
+      placeholder: inerba.socialseo::lang.settings.tab_settings.sitename_placeholder
+
+    title_position:
+      label: inerba.socialseo::lang.settings.tab_settings.title_position
+      type: radio
+      span: right
+      tab: inerba.socialseo::lang.settings.tab_settings.label
+      comment: inerba.socialseo::lang.settings.tab_settings.title_position_comment
+      options:
+        prefix: inerba.socialseo::lang.settings.tab_settings.title_position_prefix
+        suffix: inerba.socialseo::lang.settings.tab_settings.title_position_suffix
+
+    content:
+      type: hint
+      path: $/inerba/socialseo/models/settings/_other_tags_hint.htm
+      tab: inerba.socialseo::lang.settings.tab_settings.label
+
+    other_tags:
+      label: inerba.socialseo::lang.settings.tab_settings.other_tags
+      type: codeeditor
+      tab: inerba.socialseo::lang.settings.tab_settings.label
+      commentAbove: inerba.socialseo::lang.settings.tab_settings.other_tags_comment_above
+      comment: inerba.socialseo::lang.settings.tab_settings.other_tags_comment
+
+    og_tags_description:
+      type: hint
+      path: $/inerba/socialseo/models/settings/_og_tags_description.htm
+      tab: inerba.socialseo::lang.settings.tab_og.label
+
+    enable_og_tags:
+      label: inerba.socialseo::lang.settings.tab_og.og
+      type: switch
+      comment: inerba.socialseo::lang.settings.tab_og.og_comment
+      tab: inerba.socialseo::lang.settings.tab_og.label
+
+    og_sitename:
+      label: inerba.socialseo::lang.settings.tab_og.sitename
+      type: text
+      comment: inerba.socialseo::lang.settings.tab_og.sitename_comment
+      tab: inerba.socialseo::lang.settings.tab_og.label
+
+    og_fb_appid:
+      label: inerba.socialseo::lang.settings.tab_og.fb
+      comment: inerba.socialseo::lang.settings.tab_og.fb_comment
+      type: text
+      span: left
+      tab: inerba.socialseo::lang.settings.tab_og.label
+
+    twitter_card_description:
+      type: hint
+      path: $/inerba/socialseo/models/settings/_og_tags_description.htm
+      tab: inerba.socialseo::lang.settings.tab_twitter_card.label
+
+    enable_twitter_card:
+      label: inerba.socialseo::lang.settings.tab_twitter_card.twitter_card
+      type: switch
+      comment: inerba.socialseo::lang.settings.tab_twitter_card.twitter_card_comment
+      tab: inerba.socialseo::lang.settings.tab_twitter_card.label
+
+    twitter_card_site:
+      label: 'Twitter site'
+      type: text
+      placeholder: '@'
+      tab: inerba.socialseo::lang.settings.tab_twitter_card.label
+
+
+
+
+
+
+

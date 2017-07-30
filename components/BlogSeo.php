@@ -14,6 +14,12 @@ class BlogSeo extends ComponentBase
 
     public function defineProperties()
     {
-        return [];
+        return [
+            "post" => [
+                "title" => "data",
+                "default" => "post"
+            ]
+        ];
     }
+
 }

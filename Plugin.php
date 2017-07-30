@@ -186,6 +186,21 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerSettings()
+    {
+        return [
+            'settings' => [
+                'label'       => 'inerba.socialseo::lang.settings.label',
+                'description' => 'inerba.socialseo::lang.settings.description',
+                'icon'        => 'icon-search',
+                'category'    =>  SettingsManager::CATEGORY_MYSETTINGS,
+                'permissions' => ['inerba.socialseo.settings.edit'],
+                'class'       => 'Inerba\SocialSeo\Models\Settings',
+                'order'       => 100
+            ]
+        ];
+    }
+
     public function registerComponents()
     {
         return [
@@ -207,10 +222,14 @@ class Plugin extends PluginBase
     {
         return [
             'functions' => [
-                'seo_title'       => [Seo::class, 'title'],
-                'seo_description' => [Seo::class, 'description'],
-                'seo_canonical'   => [Seo::class, 'canonical'],
-                'seo_meta'        => [Seo::class, 'meta'],
+                'seo_title'         => [Seo::class, 'title'],
+                'seo_description'   => [Seo::class, 'description'],
+                'seo_canonical'     => [Seo::class, 'canonical'],
+                'seo_meta'          => [Seo::class, 'meta'],
+                'seo_og'            => [Seo::class, 'og_meta'],
+                'seo_twitter_card'  => [Seo::class, 'twitter_card'],
+                'seo_short'         => [Seo::class, 'short'],
+                'seo_other'         => [Seo::class, 'otherMeta'],
             ]
         ];
     }
