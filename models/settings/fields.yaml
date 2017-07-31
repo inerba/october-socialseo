@@ -70,7 +70,7 @@ tabs:
 
     twitter_card_description:
       type: hint
-      path: $/inerba/socialseo/models/settings/_og_tags_description.htm
+      path: $/inerba/socialseo/models/settings/_twitter_card_description.htm
       tab: inerba.socialseo::lang.settings.tab_twitter_card.label
 
     enable_twitter_card:
@@ -89,25 +89,36 @@ tabs:
       label: 'Title ideal length'
       type: number
       default: 60
+      span: left
       tab: Advanced
 
     seo_meta_description_maxlength:
       label: 'Meta description ideal length'
       type: number
       default: 155
+      span: right
       tab: Advanced
 
     seo_facebook_maxlength:
       label: 'Facebook ideal length'
       type: number
       default: 255
+      span: left
       tab: Advanced
 
     seo_twitter_maxlength:
       label: 'Twitter ideal length'
       type: number
       default: 255
+      span: right
       tab: Advanced
+
+    seo_meta_referrer:
+      label: 'Set meta referrer "unsafe-url"?'
+      type: switch
+      comment: 'info: https://moz.com/blog/meta-referrer-tag'
+      tab: Advanced
+
 
 
 

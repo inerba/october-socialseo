@@ -2,36 +2,7 @@
 
 use Request;
 use Inerba\SocialSeo\Models\Settings;
-//use Arcanedev\SeoHelper\Entities\Title;
-/*
-      <title>5 Tactics to Earn Links Without Having to Directly Ask - Whiteboard Friday - Moz</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1" />  
-      <meta name="description" content="Stop bumming out journalists, bloggers, and content creators" />
 
-      <link rel="canonical" href="https://moz.com/blog/earn-links-directly" />
-
-      <meta name="twitter:site" content="@Moz" />
-      <meta property="twitter:account_id" content="15651700" />
-      <meta property="fb:page_id" content="8489236245" />
-      <meta property="og:image" content="https://d1avok0lzls2w.cloudfront.net/uploads/og_image/597ab34f8042c1.11997587.jpg" />
-      <meta property="og:title" content="5 Tactics to Earn Links Without Having to Directly Ask - Whiteboard Friday" />
-      <meta property="og:description" content="Stop bumming out journalists, bloggers, and content creators by begging for links. Try out some of Rand&#039;s tactics in this Whiteboard Friday to earn those links without the painful ask (and low success rate)." />
-      <meta property="og:type" content="article" />
-      <meta property="og:site_name" content="Moz" />
-      <meta property="fb:admins" content="22408537" />
-      <meta property="og:url" content="https://moz.com/blog/earn-links-directly" />
-      <meta property="twitter:title" content="5 Tactics to Earn Links Without Having to Directly Ask - Whiteboard Friday" />
-      <meta property="twitter:description" content="Stop bumming out journalists, bloggers, and content creators by begging for links. Try out some of Rand&#039;s tactics in this Whiteboard Friday to earn those links without the painful ask (and low success rate)." />
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:image:src" content="https://d1avok0lzls2w.cloudfront.net/uploads/twitter_image/597ab34e8fde50.38855560.jpg" />
-      <meta property="twitter:creator" content="@randfish" />
-      <meta name="referrer" content="unsafe-url">
-
-      <meta name="twitter:site" content="@Moz" />
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:creator" content="@randfish" />
-
-    */
 class Seo
 {
 	public static function title($title, $prefix_suffix = true)
@@ -85,6 +56,17 @@ class Seo
         if($settings->other_tags)
         {
             return $settings->other_tags;
+        }
+        return "";
+    }
+
+  public static function referrerMeta()
+    {
+        $settings = Settings::instance();
+
+        if($settings->seo_meta_referrer)
+        {
+            return self::meta('name', 'referrer', 'unsafe-url');
         }
         return "";
     }
