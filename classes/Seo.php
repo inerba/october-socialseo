@@ -34,8 +34,6 @@ use Inerba\SocialSeo\Models\Settings;
     */
 class Seo
 {
-	const DESCRIPTION_LENGTH = 155;
-
 	public static function title($title, $prefix_suffix = true)
 	{
 		$settings = Settings::instance();
@@ -63,10 +61,10 @@ class Seo
 		return "<title>{$output}</title>";
 	}
 
-	public static function description($string,$limit=self::DESCRIPTION_LENGTH)
+	public static function description($string)
 	{
     try {
-		  return self::meta('name', 'description', $string, $limit);
+		  return self::meta('name', 'description', $string, Settings::get('seo_meta_description_maxlength'));
     } catch (\Exception $e) {}
 	}
 

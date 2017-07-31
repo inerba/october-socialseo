@@ -85,6 +85,32 @@ tabs:
       placeholder: '@'
       tab: inerba.socialseo::lang.settings.tab_twitter_card.label
 
+    seo_title_maxlength:
+      label: 'Title ideal length'
+      type: number
+      default: 60
+      tab: Advanced
+
+    seo_meta_description_maxlength:
+      label: 'Meta description ideal length'
+      type: number
+      default: 155
+      tab: Advanced
+
+    seo_facebook_maxlength:
+      label: 'Facebook ideal length'
+      type: number
+      default: 255
+      tab: Advanced
+
+    seo_twitter_maxlength:
+      label: 'Twitter ideal length'
+      type: number
+      default: 255
+      tab: Advanced
+
+
+
 
 
 

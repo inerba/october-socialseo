@@ -1,12 +1,16 @@
 <?php namespace Inerba\SocialSeo;
 
 use Backend;
+
 use Cms\Classes\Page;
 use Cms\Classes\Theme;
+
 use System\Classes\PluginBase;
-use Inerba\SocialSeo\Classes\Seo;
 use System\Classes\PluginManager;
 use System\Classes\SettingsManager;
+
+use Inerba\SocialSeo\Classes\Seo;
+use Inerba\SocialSeo\Models\Settings;
 
 //use RainLab\Blog\Models\Post;
 
@@ -66,14 +70,14 @@ class Plugin extends PluginBase
                     'viewBag[meta_title]' => [
                         "label" => "rainlab.pages::lang.editor.title",
                         'type'    => 'textcount',
-                        'maxlen'  => 60,
+                        'maxlen'  => Settings::get('seo_title_maxlength'),
                         'tab'     => 'cms::lang.editor.meta',
                         'span'    => 'full'
                     ],
                     'viewBag[meta_description]' => [
                         "label" => "cms::lang.editor.meta_description",
                         'type'    => 'textareacount',
-                        'maxlen'  => 155,
+                        'maxlen'  => Settings::get('seo_meta_description_maxlength'),
                         'tab'     => 'cms::lang.editor.meta',
                         'span'    => 'full'
                     ],
@@ -100,14 +104,14 @@ class Plugin extends PluginBase
                     'settings[fb_description]' => [
                         'label'   => 'inerba.socialseo::lang.editor.social.fb_description',
                         'type'    => 'textareacount',
-                        'maxlen'  => 255,
+                        'maxlen'  => Settings::get('seo_facebook_maxlength'),
                         'tab'     => 'Social',
                         'span'    => 'full'
                     ],
                     'settings[tw_description]' => [
                         'label'   => 'inerba.socialseo::lang.editor.social.tw_description',
                         'type'    => 'textareacount',
-                        'maxlen'  => 140,
+                        'maxlen'  => Settings::get('seo_twitter_maxlength'),
                         'tab'     => 'Social',
                         'span'    => 'full'
                     ],
@@ -186,16 +190,33 @@ class Plugin extends PluginBase
                 throw new ApplicationException(Lang::get('cms::lang.theme.edit.not_found'));
             }
 
+            $widget->removeField('settings[meta_title]');
+            $widget->removeField('settings[meta_description]');
+
             $widget->addFields(
                 [
+                    'settings[meta_title]' => [
+                        "label" => "cms::lang.editor.meta",
+                        'type'    => 'textcount',
+                        'maxlen'  => 60,
+                        'tab'     => 'cms::lang.editor.meta',
+                        'span'    => 'full'
+                    ],
+                    'settings[meta_description]' => [
+                        "label" => "cms::lang.editor.meta",
+                        'type'    => 'textareacount',
+                        'maxlen'  => 155,
+                        'tab'     => 'cms::lang.editor.meta',
+                        'span'    => 'full'
+                    ],
                     'settings[seo_keywords]' => [
                         'label'   => 'inerba.socialseo::lang.editor.meta_keywords',
                         'type'    => 'taglist',
                         'separator'    => 'comma',
                         'tab'     => 'cms::lang.editor.meta',
                     ],
-                    'settings[redirect_url]' => [
-                        'label'   => 'inerba.socialseo::lang.editor.redirect_url',
+                    'settings[seo_canonical]' => [
+                        'label'   => 'inerba.socialseo::lang.editor.canonical_url',
                         'type'    => 'text',
                         'tab'     => 'cms::lang.editor.meta',
                         'span'    => 'left'
@@ -209,16 +230,16 @@ class Plugin extends PluginBase
                         'span'    => 'right'
                     ],
                     'settings[fb_description]' => [
-                            'label'   => 'inerba.socialseo::lang.editor.social.fb_description',
-                            'type'    => 'textarea',
-                            'size'    => 'tiny',
-                            'tab'     => 'Social',
-                            'span'    => 'full'
+                        'label'   => 'inerba.socialseo::lang.editor.social.fb_description',
+                        'type'    => 'textareacount',
+                        'maxlen'  => 255,
+                        'tab'     => 'Social',
+                        'span'    => 'full'
                     ],
                     'settings[tw_description]' => [
                         'label'   => 'inerba.socialseo::lang.editor.social.tw_description',
-                        'type'    => 'textarea',
-                        'size'    => 'tiny',
+                        'type'    => 'textareacount',
+                        'maxlen'  => 140,
                         'tab'     => 'Social',
                         'span'    => 'full'
                     ],
