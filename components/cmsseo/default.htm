@@ -1,3 +1,4 @@
+{% spaceless %}
 {# TITLE #}
 {% if seo_title %}
 	{% set title = seo_title %}
@@ -25,7 +26,7 @@
 {% endif %}
 
 {% set canonical = seo_canonical %}
-
+{% endspaceless %}
 
 {% if isCms %}
     {% placeholder SEO default %}
@@ -40,8 +41,9 @@
 		fb_description = fb_description
 		social_image = social_image
 		canonical = canonical
-		isHome = true
 	%}
 	
 {% endif %}
+
+
 

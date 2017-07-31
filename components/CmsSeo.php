@@ -27,7 +27,7 @@ class CmsSeo extends ComponentBase
     {
         $theme = Theme::getActiveTheme();
         $page = Page::load($theme,$this->page->baseFileName);
-        $this->page["isCms"] = true;
+        $this->page["isCms"] = false;
 
         if($page->hasComponent("blogPost")) {
             $this->isCms = $this->page["isCms"] = true;          
