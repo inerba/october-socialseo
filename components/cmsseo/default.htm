@@ -1,47 +1,50 @@
-{% spaceless %}
-{# TITLE #}
-{% if seo_title %}
-	{% set title = seo_title %}
-{% else %}
-	{% set title = false %}
-{% endif %}
-
-{# META DESCRIPTION #}
-{% if seo_description %}
-	{% set description = seo_description %}
-{% endif %}
-
-{# SOCIAL DESCRIPTION #}
-{% if seo_fb_description %}
-	{% set fb_description = seo_fb_description %}
-{% else %}
-	{% set fb_description = description %}
-{% endif %}
-
-{# OG IMAGE & TWITTER CARD IMAGE #}
-{% if post.social_image %}
-	{% set social_image = post.social_image.thumb(1200, 630, { mode: 'crop', quality: '80', extension: 'jpg' }) %}
-{% else %}
-	{% set social_image = post.cover_image.thumb(1200, 630, { mode: 'crop', quality: '80', extension: 'jpg' }) %}
-{% endif %}
-
-{% set canonical = seo_canonical %}
-{% endspaceless %}
-
 {% if isCms %}
     {% placeholder SEO default %}
 
     {% endplaceholder %}
 {% else %}
 
-	{# DISPLAY DOPO LA PREPARAZIONE #}
-	{% partial 'CmsSeo::seo' 
-		title = title
-		description = description
-		fb_description = fb_description
-		social_image = social_image
-		canonical = canonical
-	%}
+	{% spaceless %}
+		{# TITLE #}
+		{% if seo_title %}
+			{% set title = seo_title %}
+		{% else %}
+			{% set title = false %}
+		{% endif %}
+
+		{# META DESCRIPTION #}
+		{% if seo_description %}
+			{% set description = seo_description %}
+		{% endif %}
+
+		{# SOCIAL DESCRIPTION #}
+		{% if seo_fb_description %}
+			{% set fb_description = seo_fb_description %}
+		{% else %}
+			{% set fb_description = description %}
+		{% endif %}
+
+		{# OG IMAGE & TWITTER CARD IMAGE #}
+		{% if post.social_image %}
+			{% set social_image = post.social_image.thumb(1200, 630, { mode: 'crop', quality: '80', extension: 'jpg' }) %}
+		{% else %}
+			{% set social_image = post.cover_image.thumb(1200, 630, { mode: 'crop', quality: '80', extension: 'jpg' }) %}
+		{% endif %}
+
+		{% set canonical = seo_canonical %}
+	{% endspaceless %}
+
+    {% placeholder SEO default %}
+	    <!-- CMSSeo -->
+		{# DISPLAY DOPO LA PREPARAZIONE #}
+		{% partial 'CmsSeo::seo' 
+			title = title
+			description = description
+			fb_description = fb_description
+			social_image = social_image
+			canonical = canonical
+		%}
+	{% endplaceholder %}
 	
 {% endif %}
 

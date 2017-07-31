@@ -1,3 +1,40 @@
-<p>This is the default markup for component PageSeo</p>
+{% spaceless %}
 
-<small>You can delete this file if you want</small>
+{# TITLE #}
+{% if __SELF__.seo_title %}
+	{% set title = __SELF__.seo_title %}
+{% else %}
+	{% set title = false %}
+{% endif %}
+
+{# META DESCRIPTION #}
+{% if __SELF__.seo_description %}
+	{% set description = __SELF__.seo_description %}
+{% endif %}
+
+{# SOCIAL DESCRIPTION #}
+{% if __SELF__.seo_fb_description %}
+	{% set fb_description = __SELF__.seo_fb_description %}
+{% else %}
+	{% set fb_description = description %}
+{% endif %}
+
+{# OG IMAGE & TWITTER CARD IMAGE #}
+{% if post.social_image %}
+	{% set social_image = post.social_image.thumb(1200, 630, { mode: 'crop', quality: '80', extension: 'jpg' }) %}
+{% else %}
+	{% set social_image = post.cover_image.thumb(1200, 630, { mode: 'crop', quality: '80', extension: 'jpg' }) %}
+{% endif %}
+
+{% set canonical = __SELF__.seo_canonical %}
+{% endspaceless %}
+
+<!-- StaticPageSeo -->
+{% partial 'CmsSeo::seo' 
+	title = title
+	description = description
+	fb_description = fb_description
+	social_image = social_image
+	canonical = canonical
+%}
+
