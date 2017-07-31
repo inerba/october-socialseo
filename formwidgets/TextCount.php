@@ -33,12 +33,4 @@ class TextCount extends FormWidgetBase
         $this->vars['form'] = $this;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function loadAssets()
-    {
-        $this->addJs('/plugins/inerba/socialseo/assets/js/calculate_text_length.js');
-    }
-
 }
