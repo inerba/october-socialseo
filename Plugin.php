@@ -15,6 +15,7 @@ use System\Classes\SettingsManager;
  */
 class Plugin extends PluginBase
 {
+
     /**
      * Returns information about this plugin.
      *
@@ -32,11 +33,16 @@ class Plugin extends PluginBase
 
     public function boot()
     {
+
+        // INJECT TEXTCOUNT JS
+        \Event::listen('backend.page.beforeDisplay', function($controller, $action, $params) {
+            $controller->addJs('/plugins/inerba/socialseo/assets/js/calculate_text_length.js');
+        });
+    
         if( PluginManager::instance()->hasPlugin('RainLab.Blog') )
         {
             
             \RainLab\Blog\Models\Post::extend(function($model){
-
 
                 $model->jsonable(array_merge($model->getJsonable(), ["socialseo"]));
 
@@ -52,7 +58,25 @@ class Plugin extends PluginBase
     {
         \Event::listen('backend.form.extendFields', function ($widget) {
             if (PluginManager::instance()->hasPlugin('RainLab.Pages') && $widget->model instanceof \RainLab\Pages\Classes\Page) {
+
+                $widget->removeField('viewBag[meta_title]');
+                $widget->removeField('viewBag[meta_description]');
+
                 $widget->addFields([
+                    'viewBag[meta_title]' => [
+                        "label" => "rainlab.pages::lang.editor.title",
+                        'type'    => 'textcount',
+                        'maxlen'  => 60,
+                        'tab'     => 'cms::lang.editor.meta',
+                        'span'    => 'full'
+                    ],
+                    'viewBag[meta_description]' => [
+                        "label" => "cms::lang.editor.meta_description",
+                        'type'    => 'textareacount',
+                        'maxlen'  => 155,
+                        'tab'     => 'cms::lang.editor.meta',
+                        'span'    => 'full'
+                    ],
                     'viewBag[socialseo][keywords]' => [
                         'label'   => 'inerba.socialseo::lang.editor.meta_keywords',
                         'type'    => 'taglist',
@@ -82,8 +106,8 @@ class Plugin extends PluginBase
                     ],
                     'settings[tw_description]' => [
                         'label'   => 'inerba.socialseo::lang.editor.social.tw_description',
-                        'type'    => 'textarea',
-                        'size'    => 'tiny',
+                        'type'    => 'textareacount',
+                        'maxlen'  => 140,
                         'tab'     => 'Social',
                         'span'    => 'full'
                     ],

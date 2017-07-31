@@ -38,7 +38,7 @@ class TextCount extends FormWidgetBase
      */
     public function loadAssets()
     {
-        $this->addJs('js/calculate_text_length.js', 'Inerba.SocialSeo');
+        $this->addJs('/plugins/inerba/socialseo/assets/js/calculate_text_length.js');
     }
 
 }
