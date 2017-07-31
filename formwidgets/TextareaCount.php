@@ -38,6 +38,7 @@ class TextareaCount extends FormWidgetBase
      */
     public function loadAssets()
     {
+        dd('ciao');
         $this->addJs('js/calculate_text_length.js', 'Inerba.SocialSeo');
     }
 

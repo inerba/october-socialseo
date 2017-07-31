@@ -27,16 +27,18 @@ class CmsSeo extends ComponentBase
     {
         $theme = Theme::getActiveTheme();
         $page = Page::load($theme,$this->page->baseFileName);
-        $this->page["isBlog"] = false;
+        $this->page["isCms"] = true;
 
-        if(!$page->hasComponent("blogPost")) {
-
+        if($page->hasComponent("blogPost")) {
+            $this->isCms = $this->page["isCms"] = true;          
+        } elseif($page->hasComponent("customSeo")) {
+            $this->isCms = $this->page["isCms"] = true;
+        } else {
             $this->seo_title = $this->page["seo_title"]             = empty($this->page->meta_title) ? $this->page->title : $this->page->meta_title;
             $this->seo_description = $this->page["seo_description"] = Seo::render($this->page->meta_description);
             $this->seo_canonical = $this->page["seo_canonical"] = $this->page->seo_canonical;
 
-        } else {
-            $this->isBlog = $this->page["isBlog"] = true;
+            $this->seo_fb_description = $this->page["seo_fb_description"] = Seo::render($this->page->fb_description);
         }
 
     }

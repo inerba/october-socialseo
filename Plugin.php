@@ -53,32 +53,46 @@ class Plugin extends PluginBase
         \Event::listen('backend.form.extendFields', function ($widget) {
             if (PluginManager::instance()->hasPlugin('RainLab.Pages') && $widget->model instanceof \RainLab\Pages\Classes\Page) {
                 $widget->addFields([
-                        'viewBag[socialseo][keywords]' => [
-                            'label'   => 'inerba.socialseo::lang.editor.meta_keywords',
-                            'type'    => 'taglist',
-                            'separator'    => 'comma',
-                            'tab'     => 'cms::lang.editor.meta'
-                        ],
-                        'viewBag[socialseo][canonical_url]' => [
-                            'label'   => 'inerba.socialseo::lang.editor.canonical_url',
-                            'type'    => 'text',
-                            'tab'     => 'cms::lang.editor.meta',
-                            'span'    => 'left'
-                        ],
-                        'viewBag[socialseo][robot]' => [
-                            'label'   => 'inerba.socialseo::lang.editor.robot',
-                            'type'    => 'dropdown',
-                            'tab'     => 'cms::lang.editor.meta',
-                            'options' => $this->getRobotOptions(),
-                            'default' => 'index',
-                            'span'    => 'left'
-                        ],
-                        'viewBag[social_image]' => [
-                            'label'   => 'inerba.socialseo::lang.editor.social.social_image',
-                            'type'    => 'mediafinder',
-                            'mode'    => 'image',
-                            'tab'     => 'SEO e Social',
-                        ],
+                    'viewBag[socialseo][keywords]' => [
+                        'label'   => 'inerba.socialseo::lang.editor.meta_keywords',
+                        'type'    => 'taglist',
+                        'separator'    => 'comma',
+                        'tab'     => 'cms::lang.editor.meta'
+                    ],
+                    'viewBag[socialseo][canonical_url]' => [
+                        'label'   => 'inerba.socialseo::lang.editor.canonical_url',
+                        'type'    => 'text',
+                        'tab'     => 'cms::lang.editor.meta',
+                        'span'    => 'left'
+                    ],
+                    'viewBag[socialseo][robot]' => [
+                        'label'   => 'inerba.socialseo::lang.editor.robot',
+                        'type'    => 'dropdown',
+                        'tab'     => 'cms::lang.editor.meta',
+                        'options' => $this->getRobotOptions(),
+                        'default' => 'index',
+                        'span'    => 'right'
+                    ],
+                    'settings[fb_description]' => [
+                        'label'   => 'inerba.socialseo::lang.editor.social.fb_description',
+                        'type'    => 'textareacount',
+                        'maxlen'  => 255,
+                        'tab'     => 'Social',
+                        'span'    => 'full'
+                    ],
+                    'settings[tw_description]' => [
+                        'label'   => 'inerba.socialseo::lang.editor.social.tw_description',
+                        'type'    => 'textarea',
+                        'size'    => 'tiny',
+                        'tab'     => 'Social',
+                        'span'    => 'full'
+                    ],
+                    'settings[social_image]' => [
+                        'label'   => 'inerba.socialseo::lang.editor.social.social_image',
+                        'type'    => 'mediafinder',
+                        'mode'    => 'image',
+                        'tab'     => 'Social',
+                    ],
                 ],
                 'primary');
             }
@@ -170,6 +184,26 @@ class Plugin extends PluginBase
                         'default' => 'index',
                         'span'    => 'right'
                     ],
+                    'settings[fb_description]' => [
+                            'label'   => 'inerba.socialseo::lang.editor.social.fb_description',
+                            'type'    => 'textarea',
+                            'size'    => 'tiny',
+                            'tab'     => 'Social',
+                            'span'    => 'full'
+                    ],
+                    'settings[tw_description]' => [
+                        'label'   => 'inerba.socialseo::lang.editor.social.tw_description',
+                        'type'    => 'textarea',
+                        'size'    => 'tiny',
+                        'tab'     => 'Social',
+                        'span'    => 'full'
+                    ],
+                    'settings[social_image]' => [
+                        'label'   => 'inerba.socialseo::lang.editor.social.social_image',
+                        'type'    => 'mediafinder',
+                        'mode'    => 'image',
+                        'tab'     => 'Social',
+                    ],
                 ],
                 'primary'
             );
@@ -207,6 +241,7 @@ class Plugin extends PluginBase
             'Inerba\SocialSeo\Components\BlogSeo' => 'BlogSeo',
             'Inerba\SocialSeo\Components\PageSeo' => 'PageSeo',
             'Inerba\SocialSeo\Components\CmsSeo' => 'CmsSeo',
+            'Inerba\SocialSeo\Components\CustomSeo' => 'customSeo',
         ];
     }
 

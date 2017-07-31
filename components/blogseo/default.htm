@@ -31,17 +31,11 @@
 {# DISPLAY DOPO LA PREPARAZIONE #}
 {% put SEO %}
 {% default %}
-	
-	{{ seo_description(description) }}
-
-	{{ seo_canonical(canonical) }}
-    
-    {{ seo_title(title) }}
-
-    {{ seo_og(title, fb_description, canonical, social_image) }}
-    
-    {{ seo_twitter_card(title, fb_description, social_image, '@ileP', 'summary_large_image') }}
-
-    {{ seo_other() }}
-
+	{% partial 'CmsSeo::seo' 
+		title = title
+		description = description
+		fb_description = fb_description
+		social_image = social_image
+		canonical = canonical
+	%}
 {% endput %}

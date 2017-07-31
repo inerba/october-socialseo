@@ -36,11 +36,11 @@ class Seo
 {
 	const DESCRIPTION_LENGTH = 155;
 
-	public static function title($title)
+	public static function title($title, $prefix_suffix = true)
 	{
 		$settings = Settings::instance();
 
-		if($settings->enable_title)
+		if($settings->enable_title && $prefix_suffix)
         {
             $position = $settings->title_position;
             $site_title = $settings->title;
@@ -65,7 +65,9 @@ class Seo
 
 	public static function description($string,$limit=self::DESCRIPTION_LENGTH)
 	{
-		return self::meta('name', 'description', $string, $limit);
+    try {
+		  return self::meta('name', 'description', $string, $limit);
+    } catch (\Exception $e) {}
 	}
 
 	public static function meta($type='property', $name, $content, $limit=false)
@@ -108,55 +110,59 @@ class Seo
 
 	public static function og_meta($title,$description,$canonical=null,$social_image=null)
     {
-        $settings = Settings::instance();
-        if($settings->enable_og_tags)
-        {
-            $ogTags = "";
-            
-            if($settings->og_fb_appid)
-                $ogTags  .= '<meta property="fb:app_id" content="'.$settings->og_fb_appid.'" />' ."\n" ;
-            
-            if($settings->og_sitename)
-                $ogTags  .= '<meta property="og:site_name" content="'.$settings->og_sitename .'" />'."\n" ;
-            
-            $ogUrl = empty($post->canonical_url) ? Request::url() : $this->page->canonical_url ;
+        try {
+          $settings = Settings::instance();
+          if($settings->enable_og_tags)
+          {
+              $ogTags = "";
+              
+              if($settings->og_fb_appid)
+                  $ogTags  .= '<meta property="fb:app_id" content="'.$settings->og_fb_appid.'" />' ."\n" ;
+              
+              if($settings->og_sitename)
+                  $ogTags  .= '<meta property="og:site_name" content="'.$settings->og_sitename .'" />'."\n" ;
+              
+              $ogUrl = empty($post->canonical_url) ? Request::url() : $this->page->canonical_url ;
 
-            $ogTags .= '<meta property="og:description" content="'.$description.'" />'."\n" ;
-            $ogTags .= '<meta property="og:title" content="'. $title .'" />'."\n" ;
-            $ogTags .= '<meta property="og:url" content="'. $ogUrl .'" />'."\n" ;
-            if(!empty($social_image)){
-            	$ogTags .= '<meta property="og:image" content="'. $social_image .'" />'."\n" ;
-            	$ogTags .= '<meta property="og:image:width" content="1200" />'."\n" ;
-            	$ogTags .= '<meta property="og:image:height" content="630" />'."\n" ;
-            }
+              $ogTags .= '<meta property="og:description" content="'.$description.'" />'."\n" ;
+              $ogTags .= '<meta property="og:title" content="'. $title .'" />'."\n" ;
+              $ogTags .= '<meta property="og:url" content="'. $ogUrl .'" />'."\n" ;
+              if(!empty($social_image)){
+              	$ogTags .= '<meta property="og:image" content="'. $social_image .'" />'."\n" ;
+              	$ogTags .= '<meta property="og:image:width" content="1200" />'."\n" ;
+              	$ogTags .= '<meta property="og:image:height" content="630" />'."\n" ;
+              }
 
-            return $ogTags;
-        }
+              return $ogTags;
+          }
+        } catch (\Exception $e) {}
     }
 
     public static function twitter_card($title,$description,$social_image=null,$creator=null,$type = 'summary_large_image')
     {
-        $settings = Settings::instance();
-        if($settings->enable_twitter_card)
-        {
-            $cardTags = "";
-            
-            $cardTags .= self::meta('name', 'twitter:card', $type)."\n" ;
+        try {
+          $settings = Settings::instance();
+          if($settings->enable_twitter_card)
+          {
+              $cardTags = "";
+              
+              $cardTags .= self::meta('name', 'twitter:card', $type)."\n" ;
 
-            if($settings->twitter_card_site)
-                $cardTags  .= self::meta('name', 'twitter:site', $settings->twitter_card_site)."\n" ;
-            
-            if(!empty($creator))
-                $cardTags  .= self::meta('name', 'twitter:creator', $creator)."\n" ;
-            
-            $cardTags .= self::meta('name', 'twitter:title', $title)."\n" ;
-            $cardTags .= self::meta('name', 'twitter:description', $description)."\n" ;
+              if($settings->twitter_card_site)
+                  $cardTags  .= self::meta('name', 'twitter:site', $settings->twitter_card_site)."\n" ;
+              
+              if(!empty($creator))
+                  $cardTags  .= self::meta('name', 'twitter:creator', $creator)."\n" ;
+              
+              $cardTags .= self::meta('name', 'twitter:title', $title)."\n" ;
+              $cardTags .= self::meta('name', 'twitter:description', $description)."\n" ;
 
-            if(!empty($social_image))
-            	$cardTags .= self::meta('name', 'twitter:image', $social_image)."\n" ;
+              if(!empty($social_image))
+              	$cardTags .= self::meta('name', 'twitter:image', $social_image)."\n" ;
 
-            return $cardTags;
-        }
+              return $cardTags;
+          }
+        } catch (\Exception $e) {}
     }
 
 	public static function og_image($image)

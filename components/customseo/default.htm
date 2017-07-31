@@ -1,0 +1,18 @@
+{# TITLE #}
+{% set title = seo_title %}
+{% set description = seo_description %}
+{% set social_image = seo_image.thumb(1200, 630, { mode: 'crop', quality: '80', extension: 'jpg' }) %}
+
+{% put SEO %}
+{% default %}
+
+	{# DISPLAY DOPO LA PREPARAZIONE #}
+	{% partial 'CmsSeo::seo' 
+		title = title
+		description = description
+		fb_description = description
+		social_image = social_image
+		canonical = canonical
+	%}
+	
+{% endput %}
