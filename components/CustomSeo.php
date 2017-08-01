@@ -60,7 +60,7 @@ class CustomSeo extends ComponentBase
         }
 
         if($p['debug_item']) {
-            dump($cd->{$p['seo_image']});
+            dump($cd);
             dump(
                 $seo
             );

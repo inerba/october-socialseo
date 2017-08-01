@@ -39,17 +39,6 @@ class Seo
     } catch (\Exception $e) {}
 	}
 
-	public static function meta($type='property', $name, $content, $limit=false)
-	{	
-		$content = self::clean($content);
-
-		if($limit) $content = self::tokenTruncate($content,$limit);
-		
-		$output = self::render($content);
-		
-		return "<meta {$type}=\"{$name}\" content=\"{$output}\" />";
-	}
-
 	public static function otherMeta()
     {
         $settings = Settings::instance();
@@ -96,23 +85,26 @@ class Seo
           {
               $ogTags = "";
 
-              $ogTags .= '<meta property="og:type" content="article" />'."\n" ;
-              
+              $ogTags .= self::meta('property', 'og:type', 'article')."\n" ;
+
               if($settings->og_fb_appid)
-                  $ogTags  .= '<meta property="fb:app_id" content="'.$settings->og_fb_appid.'" />' ."\n" ;
+                $ogTags .= self::meta('property', 'fb:app_id', $settings->og_fb_appid)."\n" ;
               
               if($settings->og_sitename)
-                  $ogTags  .= '<meta property="og:site_name" content="'.$settings->og_sitename .'" />'."\n" ;
+                $ogTags .= self::meta('property', 'og:site_name', $settings->og_sitename)."\n" ;
               
               $ogUrl = empty($post->canonical_url) ? Request::url() : $this->page->canonical_url ;
 
-              $ogTags .= self::meta('property', 'og:description', $description, $settings->seo_facebook_maxlength)."\n" ;
-              $ogTags .= '<meta property="og:title" content="'. $title .'" />'."\n" ;
-              $ogTags .= '<meta property="og:url" content="'. $ogUrl .'" />'."\n" ;
+              if($description)
+                $ogTags .= self::meta('property', 'og:description', $description, $settings->seo_facebook_maxlength)."\n" ;
+
+              $ogTags .= self::meta('property', 'og:title', $title)."\n" ;
+              $ogTags .= self::meta('property', 'og:url', $ogUrl)."\n" ;
+
               if(!empty($social_image)){
-              	$ogTags .= '<meta property="og:image" content="'. $social_image .'" />'."\n" ;
-              	$ogTags .= '<meta property="og:image:width" content="1200" />'."\n" ;
-              	$ogTags .= '<meta property="og:image:height" content="630" />'."\n" ;
+                $ogTags .= self::meta('property', 'og:image', $social_image)."\n" ;
+                $ogTags .= self::meta('property', 'og:image:width', 1200)."\n" ;
+                $ogTags .= self::meta('property', 'og:image:height', 630)."\n" ;
               }
 
               return $ogTags;
@@ -137,7 +129,9 @@ class Seo
                   $cardTags  .= self::meta('name', 'twitter:creator', $creator)."\n" ;
               
               $cardTags .= self::meta('name', 'twitter:title', $title)."\n" ;
-              $cardTags .= self::meta('name', 'twitter:description', $description)."\n" ;
+
+              if($description)
+                $cardTags .= self::meta('name', 'twitter:description', $description)."\n" ;
 
               if(!empty($social_image))
               	$cardTags .= self::meta('name', 'twitter:image', $social_image)."\n" ;
@@ -152,11 +146,23 @@ class Seo
 		return self::meta('property', 'og:image', $image);
 	}
 
+  public static function meta($type='property', $name, $content, $limit=false)
+  { 
+    $content = self::clean($content);
+
+    if($limit) $content = self::tokenTruncate($content,$limit);
+    
+    $output = self::render($content);
+    
+    return "<meta {$type}=\"{$name}\" content=\"{$output}\" />";
+  }
+
 	/*
 	 * Accorcia la stringa mantenendo le parole intere
 	 * https://stackoverflow.com/questions/79960/how-to-truncate-a-string-in-php-to-the-word-closest-to-a-certain-number-of-chara
 	 */
 	public static function tokenTruncate($string, $your_desired_width) {
+    if(strlen($string) < 1) return;
 		$parts = preg_split('/([\s\n\r]+)/u', $string, null, PREG_SPLIT_DELIM_CAPTURE);
 		$parts_count = count($parts);
 
