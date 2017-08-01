@@ -40,14 +40,42 @@ class Seo
 	}
 
 	public static function otherMeta()
-    {
-        $settings = Settings::instance();
-        if($settings->other_tags)
-        {
-            return $settings->other_tags;
-        }
-        return "";
-    }
+  {
+      $settings = Settings::instance();
+      if($settings->other_tags)
+      {
+          return $settings->other_tags;
+      }
+      return "";
+  }
+/*
+<meta name="geo.region" content="IT-FR" />
+<meta name="geo.placename" content="Vico Nel Lazio" />
+<meta name="geo.position" content="41.77739;13.34172" />
+<meta name="ICBM" content="41.77739, 13.34172" />
+
+*/
+  public static function geoTag()
+  {
+      $settings = Settings::instance();
+
+      $geoTag = "";
+
+      if($settings->seo_geotag)
+      {
+          $region = $settings->country."-".$settings->province;
+          $position = round($settings->lat,6).";".round($settings->lng,6);
+          $icbm = round($settings->lat,6).", ".round($settings->lng,6);
+
+          $geoTag .= self::meta('name', 'geo.region', $region)."\n\t";
+          $geoTag .= self::meta('name', 'geo.placename', $settings->city)."\n\t";
+          $geoTag .= self::meta('name', 'geo.position', $position)."\n\t";
+          $geoTag .= self::meta('name', 'ICBM', $position)."\n";
+
+          return $geoTag;
+      }
+      return "";
+  }
 
   public static function referrerMeta()
     {
@@ -85,26 +113,26 @@ class Seo
           {
               $ogTags = "";
 
-              $ogTags .= self::meta('property', 'og:type', 'article')."\n" ;
+              $ogTags .= self::meta('property', 'og:type', 'article')."\n\t" ;
 
               if($settings->og_fb_appid)
-                $ogTags .= self::meta('property', 'fb:app_id', $settings->og_fb_appid)."\n" ;
+                $ogTags .= self::meta('property', 'fb:app_id', $settings->og_fb_appid)."\n\t" ;
               
               if($settings->og_sitename)
-                $ogTags .= self::meta('property', 'og:site_name', $settings->og_sitename)."\n" ;
+                $ogTags .= self::meta('property', 'og:site_name', $settings->og_sitename)."\n\t" ;
               
               $ogUrl = empty($post->canonical_url) ? Request::url() : $this->page->canonical_url ;
 
               if($description)
-                $ogTags .= self::meta('property', 'og:description', $description, $settings->seo_facebook_maxlength)."\n" ;
+                $ogTags .= self::meta('property', 'og:description', $description, $settings->seo_facebook_maxlength)."\n\t" ;
 
-              $ogTags .= self::meta('property', 'og:title', $title)."\n" ;
-              $ogTags .= self::meta('property', 'og:url', $ogUrl)."\n" ;
+              $ogTags .= self::meta('property', 'og:title', $title)."\n\t" ;
+              $ogTags .= self::meta('property', 'og:url', $ogUrl)."\n\t" ;
 
               if(!empty($social_image)){
-                $ogTags .= self::meta('property', 'og:image', $social_image)."\n" ;
-                $ogTags .= self::meta('property', 'og:image:width', 1200)."\n" ;
-                $ogTags .= self::meta('property', 'og:image:height', 630)."\n" ;
+                $ogTags .= self::meta('property', 'og:image', $social_image)."\n\t" ;
+                $ogTags .= self::meta('property', 'og:image:width', 1200)."\n\t" ;
+                $ogTags .= self::meta('property', 'og:image:height', 630)."\n\t" ;
               }
 
               return $ogTags;
@@ -120,21 +148,21 @@ class Seo
           {
               $cardTags = "";
               
-              $cardTags .= self::meta('name', 'twitter:card', $type)."\n" ;
+              $cardTags .= self::meta('name', 'twitter:card', $type)."\n\t" ;
 
               if($settings->twitter_card_site)
-                  $cardTags  .= self::meta('name', 'twitter:site', $settings->twitter_card_site)."\n" ;
+                  $cardTags  .= self::meta('name', 'twitter:site', $settings->twitter_card_site)."\n\t" ;
               
               if(!empty($creator))
-                  $cardTags  .= self::meta('name', 'twitter:creator', $creator)."\n" ;
+                  $cardTags  .= self::meta('name', 'twitter:creator', $creator)."\n\t" ;
               
-              $cardTags .= self::meta('name', 'twitter:title', $title)."\n" ;
+              $cardTags .= self::meta('name', 'twitter:title', $title)."\n\t" ;
 
               if($description)
-                $cardTags .= self::meta('name', 'twitter:description', $description)."\n" ;
+                $cardTags .= self::meta('name', 'twitter:description', $description)."\n\t" ;
 
               if(!empty($social_image))
-              	$cardTags .= self::meta('name', 'twitter:image', $social_image)."\n" ;
+              	$cardTags .= self::meta('name', 'twitter:image', $social_image)."\n\t" ;
 
               return $cardTags;
           }

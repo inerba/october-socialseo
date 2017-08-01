@@ -1,14 +1,19 @@
-{{ seo_canonical(canonical) }}
-{% if description %}
-	{{ seo_description(description) }}
-{% endif %}
+	<!-- SEO -->
 {% if is_home %}
 	{{ seo_title(title, false) }}
 {% else %}
 	{{ seo_title(title) }}
 {% endif %}
-{{ seo_og(title, fb_description, canonical, social_image) }}
-{{ seo_twitter_card(title, fb_description, social_image, null, 'summary_large_image') }}
-{{ seo_referrer() }}
-{{ seo_other() }}
-<!-- end SEO -->
+{% if description %}
+	{{ seo_description(description) }}
+{% endif %}
+	{{ seo_og(title, fb_description, canonical, social_image) }}
+	{{ seo_twitter_card(title, fb_description, social_image, null, 'summary_large_image') }}
+{% if is_home %}
+	{{ seo_geotag() }}
+{% endif %}
+	{{ seo_referrer() }}
+	{{ seo_other() }}
+	{{ seo_canonical(canonical) }}
+	<!-- end SEO -->
+	

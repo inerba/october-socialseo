@@ -85,6 +85,47 @@ tabs:
       placeholder: '@'
       tab: inerba.socialseo::lang.settings.tab_twitter_card.label
 
+    seo_geotag:
+      label: 'Enable GEO-TAG for local seo?'
+      type: switch
+      tab: Geo-tag
+
+    address:
+        label: Address
+        type: geocode
+        fieldMap:
+            latitude: lat
+            longitude: lng
+            city: city
+            province: province
+            country: country
+        tab: Geo-tag
+    lat:
+        label: Latitude
+        type: text
+        span: auto
+        tab: Geo-tag
+    lng:
+        label: Longitude
+        type: text
+        span: auto
+        tab: Geo-tag
+    city:
+        label: Città
+        type: text
+        span: auto
+        tab: Geo-tag
+    province:
+        label: Provincia
+        type: text
+        span: auto
+        tab: Geo-tag
+    country:
+        label: Nazione
+        type: text
+        span: auto
+        tab: Geo-tag
+    
     seo_title_maxlength:
       label: 'Title ideal length'
       type: number
@@ -118,7 +159,6 @@ tabs:
       type: switch
       comment: 'info: https://moz.com/blog/meta-referrer-tag'
       tab: Advanced
-
 
 
 

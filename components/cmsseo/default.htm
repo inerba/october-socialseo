@@ -1,7 +1,6 @@
 {% if isCms %}
-    {% placeholder SEO default %}
-
-    {% endplaceholder %}
+{% placeholder SEO default %}
+{% endplaceholder %}
 {% else %}
 
 	{% spaceless %}
@@ -34,19 +33,14 @@
 		{% set canonical = seo_canonical %}
 	{% endspaceless %}
 
-    {% placeholder SEO default %}
-	    <!-- CMSSeo -->
-		{# DISPLAY DOPO LA PREPARAZIONE #}
-		{% partial 'CmsSeo::seo' 
-			title = title
-			description = description
-			fb_description = fb_description
-			social_image = social_image
-			canonical = canonical
-		%}
-	{% endplaceholder %}
-	
+{% placeholder SEO default %}
+{# DISPLAY DOPO LA PREPARAZIONE #}
+{% partial 'CmsSeo::seo' 
+	title = title
+	description = description
+	fb_description = fb_description
+	social_image = social_image
+	canonical = canonical
+%}
+{% endplaceholder %}
 {% endif %}
-
-
-

@@ -309,6 +309,7 @@ class Plugin extends PluginBase
                 'seo_og'            => [Seo::class, 'og_meta'],
                 'seo_twitter_card'  => [Seo::class, 'twitter_card'],
                 'seo_referrer'      => [Seo::class, 'referrerMeta'],
+                'seo_geotag'        => [Seo::class, 'geoTag'],
                 'seo_other'         => [Seo::class, 'otherMeta'],
                 'seo_short'         => [Seo::class, 'short'],
             ]
