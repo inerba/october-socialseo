@@ -106,7 +106,7 @@ class Seo
               
               $ogUrl = empty($post->canonical_url) ? Request::url() : $this->page->canonical_url ;
 
-              $ogTags .= '<meta property="og:description" content="'.$description.'" />'."\n" ;
+              $ogTags .= self::meta('property', 'og:description', $description, $settings->seo_facebook_maxlength)."\n" ;
               $ogTags .= '<meta property="og:title" content="'. $title .'" />'."\n" ;
               $ogTags .= '<meta property="og:url" content="'. $ogUrl .'" />'."\n" ;
               if(!empty($social_image)){
