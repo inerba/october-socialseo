@@ -95,6 +95,8 @@ class Seo
           if($settings->enable_og_tags)
           {
               $ogTags = "";
+
+              $ogTags .= '<meta property="og:type" content="article" />'."\n" ;
               
               if($settings->og_fb_appid)
                   $ogTags  .= '<meta property="fb:app_id" content="'.$settings->og_fb_appid.'" />' ."\n" ;
