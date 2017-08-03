@@ -10,7 +10,9 @@
 	{{ seo_og(title, fb_description, canonical, social_image) }}
 	{{ seo_twitter_card(title, fb_description, social_image, null, 'summary_large_image') }}
 {% if is_home %}
-	{{ seo_geotag() }}
+	{{ seo_geotag(true) }}
+{% else %}
+	{{ seo_geotag(false,geo_components,geo_lat,geo_lng) }}
 {% endif %}
 	{{ seo_referrer() }}
 	{{ seo_other() }}
