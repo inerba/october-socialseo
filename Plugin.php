@@ -35,6 +35,8 @@ class Plugin extends PluginBase
         ];
     }
 
+    public $require = ['RainLab.Blog','RainLab.Pages','Inerba.Geolocation'];
+
     public function boot()
     {
 
