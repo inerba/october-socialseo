@@ -50,9 +50,10 @@ class Plugin extends PluginBase
             
             \RainLab\Blog\Models\Post::extend(function($model){
 
-                $model->jsonable(array_merge($model->getJsonable(), ["socialseo"]));
-
-                $model->attachOne = array_merge( $model->attachOne, ['social_image' => 'System\Models\File'] );
+                //$model->jsonable(array_merge($model->getJsonable(), ["socialseo"]));
+                $model->addJsonable(["socialseo"]);
+                //$model->attachOne = array_merge( $model->attachOne, ['social_image' => 'System\Models\File'] );
+                $model->attachOne['social_image'] = 'System\Models\File';
 
             });
 
